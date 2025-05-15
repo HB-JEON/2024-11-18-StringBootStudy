@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style type="text/css">
+.container {
+	margin-top: 50px;
+}
+.row {
+	margin: 0px auto;
+	width: 800px;
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <h3 class="text-center">ElasticSearch를 이용한 게시판(NoSQL)</h3>
+      <!-- 지능형 웹 -->
+      <table class="table">
+        <tr>
+          <td>
+            <a href="/eboard/insert" class="btn btn-sm btn-danger">게시물 작성</a>
+          </td>
+        </tr>
+      </table>
+      <table class="table">
+        <tr>
+          <th class="text-center" width="10%">번호</th>
+          <th class="text-center" width="45%">제목</th>
+          <th class="text-center" width="15%">이름</th>
+          <th class="text-center" width="20%">작성일</th>
+          <th class="text-center" width="10%">조회수</th>
+        </tr>
+        <tr th:each="vo:${list}"> <!-- Thymeleaf for문 -->
+          <td class="text-center" width="10%" th:text="${vo.id}"></td>
+          <td width="45%"><a th:href="@{/board/detail(id=${vo.id})}" th:text="${vo.subject}"></a></td>
+          <td class="text-center" width="15%" th:text="${vo.name}"></td>
+          <td class="text-center" width="20%" th:text="${vo.regdate}"></td>
+          <td class="text-center" width="10%"th:text="${vo.hit}"></td>
+        </tr>
+        <tr>
+          <td colspan="5" class="text-center">
+            <a th:href="@{/eboard/list(page=${curpage > 1 ? curpage-1 : curpage})}" class="btn btn-sm btn-primary">이전</a>
+            <span th:text="${curpage}"></span> page / <span th:text="${totalpage}"></span> pages
+            <a th:href="@{/eboard/list(page=${curpage < totalpage ? curpage+1 : curpage})}" class="btn btn-sm btn-primary">다음</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
