@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style type="text/css">
+.container {
+	margin-top: 50px;
+}
+.row {
+	margin: 0px auto;
+	width: 450px;
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <h3 class="text-center">회원 목록</h3>
+      <table class="table">
+        <tr>
+          <td>
+            <a href="/member/insert" class="btn btn-sm btn-primary">등록</a>
+          </td>
+          <td>
+            <a href="/music/data" class="btn btn-sm btn-primary">Music 읽기</a>
+          </td>
+        </tr>
+      </table>
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="text-center">아이디</th>
+            <th class="text-center">이름</th>
+            <th class="text-center">나이</th>
+            <th class="text-center"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="vo : ${list}">
+            <td class="text-center" th:text="${vo.id}"></td> 
+            <td class="text-center">[[${vo.name}]]</td>
+            <td class="text-center">[[${vo.age}]]</td>
+            <td class="text-center">
+              <a th:href="@{/member/delete(id=${vo.id})}" class="btn btn-sm btn-info">삭제</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

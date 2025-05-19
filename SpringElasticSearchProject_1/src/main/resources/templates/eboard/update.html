@@ -17,25 +17,26 @@
 <body>
   <div class="container">
     <div class="row">
-      <h3 class="text-center">게시물 작성</h3>
-      <form method="post" action="/eboard/insert_ok">
+      <h3 class="text-center">게시물 수정</h3>
+      <form method="post" action="/eboard/update_ok">
       <table class="table">
         <tr>
           <th class="text-center" width="20%">이름</th>
           <td width="80%">
-            <input type="text" name="name" size="15" class="input-sm" required>
+            <input type="text" name="name" size="15" class="input-sm" th:value="${vo.name}" required>
+            <input type="hidden" name="id" th:value="${vo.id}">
           </td>
         </tr>
         <tr>
           <th class="text-center" width="20%">제목</th>
           <td width="80%">
-            <input type="text" name="subject" size="50" class="input-sm" required>
+            <input type="text" name="subject" size="50" class="input-sm" th:value="${vo.subject}" required>
           </td>
         </tr>
         <tr>
           <th class="text-center" width="20%">내용</th>
           <td width="80%">
-            <textarea name="content" rows="10" cols="50" required></textarea>
+            <textarea name="content" rows="10" cols="50" th:text="${vo.content}" required></textarea>
           </td>
         </tr>
         <tr>
@@ -46,8 +47,8 @@
         </tr>
         <tr>
           <td colspan="2" class="text-center">
-            <input type="submit" value="게시글 작성" class="btn-sm btn-info">
-            <input type="button" value="작성 취소" class="btn-sm btn-warning" onclick="javascript:history.back()">
+            <input type="submit" value="게시글 수정" class="btn-sm btn-info">
+            <input type="button" value="수정 취소" class="btn-sm btn-warning" onclick="javascript:history.back()">
           </td>
         </tr>
       </table>

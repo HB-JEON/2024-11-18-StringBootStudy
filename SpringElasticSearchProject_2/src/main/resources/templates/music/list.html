@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style type="text/css">
+.container {
+	margin-top: 50px;
+}
+.row {
+	margin: 0px auto;
+	width: 960px;
+}
+p {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+</style>
+</head>
+<!-- 
+	1. 반복문
+	    th:each="받는변수 : Collection / 배열"
+	               vo: ${list}
+	                   -------
+	2. 조건문
+		th:if="${조건}" th:else=""
+	3. 출력
+		[[${}]] th: text th: html...
+	4. for
+		${#numbers.sequence(1, 10)} => for(int i=1; i<=10; i++)
+	5. link
+		@{URL(?뒤에 들어가는 변수)}
+	
+	=> JSP 없이 HTML 이용하여 출력 => JSP 보다 느리다.
+	=> Spring-Framework: 서버 / 클라이언트
+	=> Spring-Boot: 서버 / Front를 별도로 제작하여 처리
+	   ----------- Java / Kotlin
+	               Java 21.ver
+	               웹은 Spring - Framework 동일
+ -->
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3" th:each="vo:${list}">
+        <div class="thumbnail">
+          <a href="#">
+            <img th:src="${vo.poster}" style="width:230px; height: 120px;">
+            <div class="caption">
+            <p>[[${vo.title}]]</p>
+            </div>
+         </a>
+       </div>
+      </div>
+    </div>
+    <div style="height: 10px"></div>
+    <div class="row text-center">
+      <a th:href="@{/music/list(page=${ curpage > 1 ? curpage-1 : curpage })}" class="btn btn-sm btn-danger">이전</a>
+      [[${curpage}]] page / [[${totalpage}]] pages
+      <a th:href="@{/music/list(page=${ curpage < totalpage ? curpage+1 : curpage})}" class="btn btn-sm btn-danger">다음</a>
+    </div>
+  </div>
+</body>
+</html>

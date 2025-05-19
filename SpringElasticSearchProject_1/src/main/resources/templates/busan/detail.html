@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style type="text/css">
+.container {
+	margin-top: 50px;
+}
+.row {
+	margin: 0px auto;
+	width: 800px;
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <table class="table">
+        <tr>
+          <td width="30%" class="text-center" rowspan="8">
+            <img th:src="${'https://www.menupan.com'+vo.poster}" style="width: 240px; height: 200px;">
+          </td>
+          <td colspan="2">
+            <h3>[[${vo.name}]]&nbsp;<span style="color: orange;" th:text="${vo.score}"></span></h3>
+          </td>
+        </tr>
+        <tr>
+          <th width="15%">주소</th>
+          <td width="55%">[[${vo.address}]]</td>
+        </tr>
+        <tr>
+          <th width="15%">전화</th>
+          <td width="55%">[[${vo.phone}]]</td>
+        </tr>
+        <tr>
+          <th width="15%">음식 종류</th>
+          <td width="55%">[[${vo.type}]]</td>
+        </tr>
+        <tr>
+          <th width="15%">가격대</th>
+          <td width="55%">[[${vo.price}]]</td>
+        </tr>
+        <tr>
+          <th width="15%">주차</th>
+          <td width="55%">[[${vo.parking}]]</td>
+        </tr>
+        <tr>
+          <th width="15%">시간</th>
+          <td width="55%">[[${vo.time}]]</td>
+        </tr>
+        <tr>
+          <th width="15%">테마</th>
+          <td width="55%">[[${vo.theme}]]</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

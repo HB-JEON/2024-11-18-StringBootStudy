@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style type="text/css">
+.container {
+	margin-top: 50px;
+}
+.row {
+	margin: 0px auto;
+	width: 450px;
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <h3 class="text-center">등록</h3>
+      <form method="post" action="/member/insert_ok">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th width="20%" class="text-center">아이디</th>
+            <td width="80%"><input type="text" name="id" size="15" class="input-sm"></td>
+          </tr>
+          <tr>
+            <th width="20%" class="text-center">이름</th>
+            <td width="80%"><input type="text" name="name" size="15" class="input-sm"></td>
+          </tr>
+          <tr>
+            <th width="20%" class="text-center">나이</th>
+            <td width="80%"><input type="number" name="age" max="100" min="20" size="20" class="input-sm"></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="text-center">
+              <input type="submit" class="btn-sm btn-danger" value="등록">
+              <input type="button" class="btn-sm btn-success" value="취소" onclick="javascript:history.back()">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
