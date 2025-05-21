@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.row{
+   margin: 0px auto;
+   width: 960px;
+}
+p{
+   overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+}
+</style>
+</head>
+<body>
+  <div class="container">
+   <div class="row">
+    <h3>부산 명소</h3>
+      <div class="col-md-3" th:each="vo:${list1}"> <!--  for(BusanVO vo:list) -->
+	    <div class="thumbnail">
+	      <a href="#">
+	        <img th:src="${vo.poster}" style="width:230px;height: 120px">
+	        <div class="caption">
+	          <p>[[${vo.title}]]</p>
+	        </div>
+	      </a>
+	    </div>
+	  </div>
+   </div>
+   <hr>
+   <div class="row">
+    <h3>부산 음식</h3>
+    <div class="col-md-3" th:each="vo:${list2}"> <!--  for(BusanVO vo:list) -->
+	    <div class="thumbnail">
+	      <a href="#">
+	        <img th:src="${vo.poster}" style="width:230px;height: 120px">
+	        <div class="caption">
+	          <p>[[${vo.title}]]</p>
+	        </div>
+	      </a>
+	    </div>
+	  </div>
+   </div>
+   <hr>
+   <div class="row">
+    <h3>부산 쇼핑</h3>
+    <div class="col-md-3" th:each="vo:${list3}"> <!--  for(BusanVO vo:list) -->
+	    <div class="thumbnail">
+	      <a href="#">
+	        <img th:src="${vo.poster}" style="width:230px;height: 120px">
+	        <div class="caption">
+	          <p>[[${vo.title}]]</p>
+	        </div>
+	      </a>
+	    </div>
+	  </div>
+   </div>
+  </div>
+</body>
+</html>
