@@ -49,22 +49,65 @@ public class BusanFoodRestController {
 	public Map food_list(@RequestParam("page") int page)
 	{
 		Map map = new HashMap();
-		int rowSize = 12;
-		int start = (page - 1) * rowSize;
-		List<BusanFoodVO> list = bService.busanListData(start);
+	    int rowSize = 12;
+	    int start = (page - 1) * rowSize;
+
+	    List<BusanFoodVO> list = bService.busanListData(start);
+	    int totalpage = bService.busanFoodTotalPage();
+
+	    final int BLOCK = 10;
+	    int startPage = ((page - 1) / BLOCK) * BLOCK + 1;
+	    int endPage = startPage + BLOCK - 1;
+	    if (endPage > totalpage)
+	        endPage = totalpage;
+
+	    map.put("list", list);
+	    map.put("curpage", page);
+	    map.put("totalpage", totalpage);
+	    map.put("startPage", startPage);
+	    map.put("endPage", endPage);
+
+	    return map;
+	}
+	
+	@GetMapping("/food/detail_react")
+	public BusanFoodEntity food_detail(@RequestParam("fno") int fno)
+	{
+		BusanFoodEntity vo = bService.busanDetailData(fno);
 		
-		int totalpage = bService.busanFoodTotalPage();
-		final int BLOCK = 10;
-		int startPgae = ((page - 1) / BLOCK * BLOCK) - 1;
-		int endPage = ((page - 1) / BLOCK * BLOCK) - BLOCK;
-		if(endPage > totalpage)
-			endPage = totalpage;
+		return vo;
+	}
+	
+	@GetMapping("/info/list_react")
+	public Map info_list(@RequestParam("cno") int cno, @RequestParam("page") int page)
+	{
+		Map map = new HashMap();
+	    int rowSize = 12;
+	    int start = (page - 1) * rowSize;
+	    List<BusanInfoEntity> list = bService.busanInfoListData(cno, start);
+	    int totalpage = bService.busanInfoTotalPage(cno);
+	    
+	    map.put("list", list);
+	    map.put("curpage", page);
+	    map.put("totalpage", totalpage);
+	    
+	    return map;
+	}
+	
+	@GetMapping("/info/detail_react")
+	public Map info_detail(@RequestParam("no") int no)
+	{
+		Map map = new HashMap();
+		BusanInfoEntity vo = bService.busanInfoDetailData(no);
+		String addr = vo.getAddress();
+		addr = addr.substring(addr.indexOf(" ") +1);
+		String addr1 = addr.trim();
+		addr1 = addr1.substring(addr1.indexOf(" ") +1);
+		String addr2 = addr1.trim();
+		addr2 = addr2.substring(0, addr2.indexOf(" "));
 		
-		map.put("list", list);
-		map.put("curpage", page);
-		map.put("totalpage", totalpage);
-		map.put("startPage", startPgae);
-		map.put("endPage", endPage);
+		map.put("vo", vo);
+		map.put("addr", addr2);
 		
 		return map;
 	}

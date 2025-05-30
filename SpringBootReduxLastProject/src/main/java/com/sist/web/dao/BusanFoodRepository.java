@@ -17,9 +17,12 @@ public interface BusanFoodRepository extends JpaRepository<BusanFoodEntity, Inte
 	public List<BusanFoodVO> busanMainData();
 	
 	@Query(value = "SELECT fno, poster, name, hit, jjimcount, likecount, score, type, theme, content "
-			+ "FROM busan_food ORDER BY fno ASC", nativeQuery = true)
+			+ "FROM busan_food ORDER BY fno ASC LIMIT :start, 12", nativeQuery = true)
 	public List<BusanFoodVO> busanListData(@Param("start") int start);
 	
 	@Query(value = "SELECT CEIL(COUNT(*)/12.0) FROM busan_food", nativeQuery = true)
 	public int busanFoodTotalPage();
+	
+	// SELECT * FROM busan_food WHERE fno = ?
+	public BusanFoodEntity findByFno(@Param("fno") int fno);
 }
