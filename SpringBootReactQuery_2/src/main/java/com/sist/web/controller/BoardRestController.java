@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.web.entity.BoardEntity;
+import com.sist.web.entity.BoardUpdateVO;
 import com.sist.web.entity.BoardVO;
 import com.sist.web.repository.BoardRepository;
 
@@ -120,31 +121,43 @@ public class BoardRestController {
 		return new ResponseEntity<>(map, HttpStatus.OK);
 	}
 	@GetMapping("/board/update/{no}")
-	public BoardEntity board_update(@PathVariable("no") int no)
+	public ResponseEntity<BoardUpdateVO> board_update(@PathVariable("no") int no)
 	{
-		BoardEntity vo = bDao.findByNo(no);
+		BoardUpdateVO vo = null;
+		try
+		{
+			bDao.boardUpdateData(no);
+		}catch(Exception e)
+		{
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		
-		return vo;
+		return new ResponseEntity<>(vo, HttpStatus.OK);
 	}
 	
 	@PutMapping("/board/update_ok")
-	public Map board_update_ok(@RequestBody BoardEntity vo)
+	public ResponseEntity<Map> board_update_ok(@RequestBody BoardEntity vo)
 	{
 		Map map = new HashMap();
-		
-		BoardEntity db = bDao.findByNo(vo.getNo());
-		if(vo.getPwd().equals(db.getPwd()))
+		try
 		{
-			vo.setNo(vo.getNo());
-			vo.setHit(db.getHit());
-			bDao.save(vo);
-			map.put("msg", "yes");
-		}
-		else
+			BoardEntity db = bDao.findByNo(vo.getNo());
+			if(vo.getPwd().equals(db.getPwd()))
+			{
+				vo.setNo(vo.getNo());
+				vo.setHit(db.getHit());
+				bDao.save(vo);
+				map.put("msg", "yes");
+			}
+			else
+			{
+				map.put("msg", "no");
+			}
+		}catch(Exception e)
 		{
-			map.put("msg", "no");
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		return map;
+		return new ResponseEntity<>(map, HttpStatus.OK);
 	}
 }
