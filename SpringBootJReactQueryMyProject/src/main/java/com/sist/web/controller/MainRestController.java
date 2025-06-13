@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sist.web.dao.*;
 import com.sist.web.vo.*;
 import com.sist.web.entity.*;
-import com.sist.web.service.BooksService;
+import com.sist.web.service.*;
 
 import java.util.*;
 
@@ -18,7 +18,7 @@ import java.util.*;
 @CrossOrigin(origins = "*")
 public class MainRestController {
 	@Autowired
-	private BooksService bService;
+	private CocktailBarService cbService;
 	
 	@GetMapping("/main")
 	public ResponseEntity<Map> main_data()
@@ -27,7 +27,7 @@ public class MainRestController {
 		
 		try
 		{
-			List<BooksVO> list = bService.booksMainData();
+			List<CocktailBarVO> list = cbService.barMainData();
 			map.put("list", list);
 		}catch (Exception e) {
 			// TODO: handle exception

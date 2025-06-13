@@ -4,7 +4,7 @@ server:
 #데이터베이스 설정 findByBetweenNum(1,10) select * from where num between 1 and 10
 spring:
   datasource:
-    url: jdbc:oracle:thin:@localhost:1521:xe
+    url: jdbc:oracle:thin:@211.238.142.124:1521:xe
     username: hr
     password: happy
     driver-class-name: oracle.jdbc.driver.OracleDriver
